@@ -1,0 +1,15 @@
+/* this is to give numbered figures in the html version */
+
+body {
+    counter-reset: figure;
+}
+
+div.figure {
+    counter-increment: figure;
+}
+
+
+div.figure .caption::before {
+    content: "Figure " counter(figure) ": ";
+    font-weight: bold;
+}
