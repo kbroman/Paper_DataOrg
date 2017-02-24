@@ -62,13 +62,13 @@ consistently. Entering and organizing your data in a consistent way from the
 start will prevent you and your collaborators from having to spend time
 harmonizing the data later.
 
-Use consistent codes for categorical variables. For a
+_Use consistent codes for categorical variables._ For a
 categorical variable like *sex*, use a single common value for
 males (e.g. "`male`") and a single common value for females
 (e.g. "`female`"). Don't sometimes write "`M`", sometimes "`male`",
 and sometimes "`Male`". Pick one and stick to it.
 
-Use a single fixed code for any missing values. We prefer to have
+_Use a consistent fixed code for any missing values._ We prefer to have
 every cell filled in,
 so that one can distinguish between
 truly missing values and unintentionally missing
@@ -80,7 +80,7 @@ missing. Also, don't insert a note in place of the data,
 explaining why it is missing. Rather, make a separate column with
 such notes.
 
-Use consistent variable names. If in one file (say the first
+_Use consistent variable names._ If in one file (say the first
 batch of subjects), you have a variable called "`Glucose_10wk`",
 then call it exactly that in other files (say for other batches of
 subjects). If it is variably called "`Glucose_10wk`",
@@ -88,37 +88,37 @@ subjects). If it is variably called "`Glucose_10wk`",
 data analyst will have to work out that these are all really the
 same thing.
 
-Use consistent subject identifiers. If sometimes it is "`153`" and
+_Use consistent subject identifiers._ If sometimes it is "`153`" and
 sometimes "`mouse153`" and sometimes "`mouse-153F`" and sometimes
 "`Mouse153`", there is going to be extra work to figure out who is
 who.
 
-Use a common data layout in multiple files. If your data are in multiple files
+_Use a consistent data layout in multiple files._ If your data are in multiple files
 and you use different layouts in different files, it will be extra work for the
 analyst to combine the files into one dataset for analysis. With a consistent
 structure, it will be easy to automate this process.
 
-Use consistent file names. Have some system for naming files. If one file is
+_Use consistent file names._ Have some system for naming files. If one file is
 called "`Serum_batch1_2015-01-30.csv`", then don't call the file for the next
 batch "`batch2_serum_52915.csv`" but rather use "`Serum_batch2_2015-05-29.csv`".
 Keeping a consistent file naming scheme will help ensure that your files remain
 well organized, and it will make it easier to batch process the files if you
 need to.
 
-Use a single common format for all dates, preferably with the standard
+_Use a consistent format for all dates,_ preferably with the standard
 format `YYYY-MM-DD`, for example `2015-08-01`. If sometimes you write `8/1/2015`
 and sometimes `8-1-15`, you are asking for trouble.
 
-Use consistent phrases in your notes. If you have a separate
+_Use consistent phrases in your notes._ If you have a separate
 column of notes (for example, "`dead`" or "`lo off curve`"), be
 consistent in what you write. Don't sometimes write "`dead`" and
 sometimes "`Dead`", or sometimes "`lo off curve`" and sometimes
 "`off curve lo`".
 
-Be careful about extra spaces within cells. A blank cell is
-different than a cell that contains a single space. And "`male`"
-is different from "` male `" (that is, with spaces at the
-beginning and end). These can be a headache later on.
+_Be careful about extra spaces within
+cells._ A blank cell is different than a cell that contains a single space. And
+"`male`" is different from "` male `" (that is, with spaces at the beginning and
+end). These can be a headache later on.
 
 ## Write dates like YYYY-MM-DD
 
@@ -166,6 +166,13 @@ However, if you do this on columns that _already_ contain dates, Excel will
 convert them to a text value of their underlying integer representation (i.e.
 days since 1900-01-01 or 1904-01-01).
 
+Another way to force Excel to treat dates as text is to begin the date with an
+apostrophe, like this: `'2014-06-14`
+(see <http://bit.ly/twitter_apos>). Excel will treat the
+cells as text, but the apostrophe will not appear when you view the spreadsheet
+or export it to other formats. This is a handy trick, but it requires impeccable
+diligence and consistency.
+
 Alternatively, you could
 create three separate columns
 with year, month, and day. Those will be ordinary integers, and so
@@ -183,7 +190,7 @@ different date formats within a column can cause headaches later.
 
 Use care about dates, and be consistent.
 
-```{r 01_bad_dates, fig.cap="A spreadsheet with inconsistent date formats."}
+```{r 01_bad_dates, fig.cap="A spreadsheet with inconsistent date formats. This spreadsheet does not adhere to our recommendations for consistency of date format."}
 mat <- data.frame(Date=c("", "", "12/6/2005", rep("", 4)),
                   "Assay date"=c("12/9/05", "12/9/05", "e", "e", "e", "1/11/2006", "1/11/2006"),
                   "Weight"=c(54.9, 45.3, 47, 45.7, 52.9, 46.1, 38.6),
@@ -207,7 +214,7 @@ It is additional work for the analyst to determine the implicit values for these
 Moreover, if the rows were sorted at some point, the
 date column could be completely mangled.
 
-```{r 02_blank_cells, fig.width=12, fig.cap="Examples of spreadsheets with blank cells. **A:** A spreadsheet where only the first of several repeated values was included. **B:** A spreadsheet with a complicated layout and some implicit column headers."}
+```{r 02_blank_cells, fig.width=12, fig.cap="Examples of spreadsheets that violate the 'no empty cells' recommendation. **A:** A spreadsheet where only the first of several repeated values was included. **B:** A spreadsheet with a complicated layout and some implicit column headers. For a tidy version of this data, see Figure 3."}
 layout(cbind(1,2), width=c(8,10))
 mat <- data.frame(id=101:107,
                   date=c("2015-06-14", "", "2015-06-18", "", "", "2015-06-20", ""),
@@ -285,13 +292,13 @@ breaking the rule of _no empty cells_.
 
 ## Make it a rectangle
 
-The best layout for your data within in a spreadsheet is as a big
-rectangle with rows corresponding to subjects and columns
-corresponding to variables. The first row should contain variable
-names. (*Please don't use more than one row for the variable names.*)
+The best layout for your data within in a spreadsheet is as a single big
+rectangle with rows corresponding to subjects and columns corresponding to
+variables. The first row should contain variable names.
+(*Please don't use more than one row for the variable names.*)
 An example of a rectangular layout is shown in Figure 4.
 
-```{r 04_example_rectangle, fig.height=3, fig.cap="An example spreadsheet with a rectangular layout."}
+```{r 04_example_rectangle, fig.height=3, fig.cap="An example spreadsheet with a rectangular layout. This layout will aid future analyses."}
 set.seed(20150803)
 mat <- data.frame(id=101:105,
                   sex=sample(c("Male", "Female"), 5, replace=TRUE),
@@ -303,17 +310,20 @@ mat <- data.frame(id=101:105,
 excel_fig(mat)
 ```
 
-Some data sets won't fit nicely into a rectangle, but they will usually
+Some data sets won't fit nicely into a single rectangle, but they will usually
 fit into a set of rectangles, in which case you can make a set of Excel files,
-each with a rectangle of data. Some data don't even fit into a set of
-rectangles, but then maybe spreadsheets are not the best format for
-them, as spreadsheets are inherently rectangular.
+each with a rectangle of data. It is best to keep each rectangle in its own
+file; tables scattered around a worksheet are difficult to work with, and they
+make it hard to export the data to CSV files (which we will discuss shortly).
+
+Some data don't even fit into a set of rectangles, but then maybe spreadsheets
+are not the best format for them, as spreadsheets are inherently rectangular.
 
 The data files that we receive are usually _not_ in rectangular
 form. More often, there seem to be bits of data sprinkled about.
 Several examples are shown in Figure 5.
 
-```{r 05_non_rectangular, fig.height=8, fig.width=12, fig.cap="Examples of spreadsheets with non-rectangular layouts."}
+```{r 05_non_rectangular, fig.height=8, fig.width=12, fig.cap="Examples of spreadsheets with non-rectangular layouts. These layouts are likely to cause problems in analysis."}
 layout(rbind(1:2, 3:4), height=c(6,10))
 
 mat2 <- t(mat)
@@ -465,7 +475,7 @@ In this sort of situation, we often see merged cells: merging the
 centered above the three columns with "`date`", "`weight`", and
 "`glucose`".
 
-```{r 07_two_header_rows, fig.width=10, fig.cap="A spreadsheet with two header rows."}
+```{r 07_two_header_rows, fig.width=10, fig.cap="A spreadsheet with two header rows. It is better to have a single header row (see Figure 8)."}
 mat6 <- rbind(c("", "", "week 4", "", "", "week 6", "", "", "week 8", "", ""),
               c("Mouse ID", "SEX", rep(c("date", "weight", "glucose"), 3)),
               c("3005", "M", "3/30/2007",  19.3, 635.0, "4/11/2007",  31,   460.7, "4/27/2007",  39.6, 530.2),
@@ -856,5 +866,9 @@ it is best not to use copy-and-paste to rearrange the files. By doing
 so, there's a good chance of introducing errors. Data rearrangement is
 best accomplished via code (such as with an R, Python, or Ruby
 script) so you never lose the record of what you did to the data.
+
+## Acknowledgments
+
+Lance Waller generously provided comments to improve the manuscript.
 
 ## References
