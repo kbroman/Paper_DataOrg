@@ -25,13 +25,20 @@ between operating systems, which can cause problems in downstream analyses
 these common errors and design spreadsheets that are tidy, consistent, and as
 resistant to mistakes as possible.
 
-In this paper we offer practical recommendations for organizing data in
-spreadsheets. By following this advice, researchers will create spreadsheets
-that are less error-prone, easier for computers to process, and easier to share
-with collaborators and the public. Spreadsheets that adhere to our
-recommendations will interface easily with the tidy tools and reproducible
-methods described elsewhere in this collection and will form the basis of a
-robust and reproducible analytic workflow.
+Spreadsheets are often used as a multipurpose tool for data entry, storage,
+analysis, and visualization. Most spreadsheet programs allow users to perform
+all of these tasks, however we believe that spreadsheets are best suited to data
+entry and storage, and that analysis and visualization should happen separately.
+Analyzing and visualizing data in a separate program reduces the risk of
+contaminating or destroying the raw data in the spreadsheet.
+
+In this paper we offer practical recommendations for organizing spreadsheet data
+in a way that both humans and computer programs can read. By following this
+advice, researchers will create spreadsheets that are less error-prone, easier
+for computers to process, and easier to share with collaborators and the public.
+Spreadsheets that adhere to our recommendations will interface easily with the
+tidy tools and reproducible methods described elsewhere in this collection and
+will form the basis of a robust and reproducible analytic workflow.
 
 ## Be consistent
 
@@ -40,13 +47,13 @@ consistently. Entering and organizing your data in a consistent way from the
 start will prevent you and your collaborators from having to spend time
 harmonizing the data later.
 
-Use consistent codes for categorical variables. For a
+_Use consistent codes for categorical variables._ For a
 categorical variable like *sex*, use a single common value for
 males (e.g. "`male`") and a single common value for females
 (e.g. "`female`"). Don't sometimes write "`M`", sometimes "`male`",
 and sometimes "`Male`". Pick one and stick to it.
 
-Use a single fixed code for any missing values. We prefer to have
+_Use a consistent fixed code for any missing values._ We prefer to have
 every cell filled in,
 so that one can distinguish between
 truly missing values and unintentionally missing
@@ -58,7 +65,7 @@ missing. Also, don't insert a note in place of the data,
 explaining why it is missing. Rather, make a separate column with
 such notes.
 
-Use consistent variable names. If in one file (say the first
+_Use consistent variable names._ If in one file (say the first
 batch of subjects), you have a variable called "`Glucose_10wk`",
 then call it exactly that in other files (say for other batches of
 subjects). If it is variably called "`Glucose_10wk`",
@@ -66,37 +73,37 @@ subjects). If it is variably called "`Glucose_10wk`",
 data analyst will have to work out that these are all really the
 same thing.
 
-Use consistent subject identifiers. If sometimes it is "`153`" and
+_Use consistent subject identifiers._ If sometimes it is "`153`" and
 sometimes "`mouse153`" and sometimes "`mouse-153F`" and sometimes
 "`Mouse153`", there is going to be extra work to figure out who is
 who.
 
-Use a common data layout in multiple files. If your data are in multiple files
+_Use a consistent data layout in multiple files._ If your data are in multiple files
 and you use different layouts in different files, it will be extra work for the
 analyst to combine the files into one dataset for analysis. With a consistent
 structure, it will be easy to automate this process.
 
-Use consistent file names. Have some system for naming files. If one file is
+_Use consistent file names._ Have some system for naming files. If one file is
 called "`Serum_batch1_2015-01-30.csv`", then don't call the file for the next
 batch "`batch2_serum_52915.csv`" but rather use "`Serum_batch2_2015-05-29.csv`".
 Keeping a consistent file naming scheme will help ensure that your files remain
 well organized, and it will make it easier to batch process the files if you
 need to.
 
-Use a single common format for all dates, preferably with the standard
+_Use a consistent format for all dates,_ preferably with the standard
 format `YYYY-MM-DD`, for example `2015-08-01`. If sometimes you write `8/1/2015`
 and sometimes `8-1-15`, you are asking for trouble.
 
-Use consistent phrases in your notes. If you have a separate
+_Use consistent phrases in your notes._ If you have a separate
 column of notes (for example, "`dead`" or "`lo off curve`"), be
 consistent in what you write. Don't sometimes write "`dead`" and
 sometimes "`Dead`", or sometimes "`lo off curve`" and sometimes
 "`off curve lo`".
 
-Be careful about extra spaces within cells. A blank cell is
-different than a cell that contains a single space. And "`male`"
-is different from "` male `" (that is, with spaces at the
-beginning and end). These can be a headache later on.
+_Be careful about extra spaces within
+cells._ A blank cell is different than a cell that contains a single space. And
+"`male`" is different from "` male `" (that is, with spaces at the beginning and
+end). These can be a headache later on.
 
 ## Write dates like YYYY-MM-DD
 
@@ -104,15 +111,11 @@ When formatting dates, we strongly recommend using the global
 "ISO 8601" standard, `YYYY-MM-DD`, such as `2013-02-27`. (See the related xkcd
 comic, <https://xkcd.com/1179>.)
 
-But note that Microsoft Excel does
-bizarre things with
-dates (see <https://storify.com/kara_woo/excel-date-system-fiasco>). It
-stores them internally as an integer, counting the days since
-1900-01-01. Wait that is only for Windows; on Macs, it counts the days
-since 1904-01-01.
-
-So, be careful to check that the dates haven't been mangled when your
-data come out of Excel.
+But note that Microsoft Excel does bizarre things with dates
+(see <https://storify.com/kara_woo/excel-date-system-fiasco>). It stores them
+internally as an integer, counting the days since 1900-01-01. Wait, that is only
+for Windows; on Macs, it counts the days since 1904-01-01. So, be careful to
+check that the dates haven't been mangled when your data come out of Excel.
 
 Excel also has a tendency to turn other things into dates. For
 example, Roger Peng reported on a conversation between Kasper Hansen
@@ -144,6 +147,13 @@ However, if you do this on columns that _already_ contain dates, Excel will
 convert them to a text value of their underlying integer representation (i.e.
 days since 1900-01-01 or 1904-01-01).
 
+Another way to force Excel to treat dates as text is to begin the date with an
+apostrophe, like this: `'2014-06-14`
+(see <http://bit.ly/twitter_apos>). Excel will treat the
+cells as text, but the apostrophe will not appear when you view the spreadsheet
+or export it to other formats. This is a handy trick, but it requires impeccable
+diligence and consistency.
+
 Alternatively, you could
 create three separate columns
 with year, month, and day. Those will be ordinary integers, and so
@@ -161,7 +171,7 @@ different date formats within a column can cause headaches later.
 
 Use care about dates, and be consistent.
 
-![A spreadsheet with inconsistent date formats.](figure/01_bad_dates-1.png)
+![A spreadsheet with inconsistent date formats. This spreadsheet does not adhere to our recommendations for consistency of date format.](figure/01_bad_dates-1.png)
 
 ## No empty cells
 
@@ -179,7 +189,7 @@ It is additional work for the analyst to determine the implicit values for these
 Moreover, if the rows were sorted at some point, the
 date column could be completely mangled.
 
-![Examples of spreadsheets with blank cells. **A:** A spreadsheet where only the first of several repeated values was included. **B:** A spreadsheet with a complicated layout and some implicit column headers.](figure/02_blank_cells-1.png)
+![Examples of spreadsheets that violate the 'no empty cells' recommendation. **A:** A spreadsheet where only the first of several repeated values was included. **B:** A spreadsheet with a complicated layout and some implicit column headers. For a tidy version of this data, see Figure 3.](figure/02_blank_cells-1.png)
 
 The spreadsheet in Figure 2B has a complex layout with information for
 different treatments.
@@ -223,25 +233,28 @@ breaking the rule of _no empty cells_.
 
 ## Make it a rectangle
 
-The best layout for your data within in a spreadsheet is as a big
-rectangle with rows corresponding to subjects and columns
-corresponding to variables. The first row should contain variable
-names. (*Please don't use more than one row for the variable names.*)
+The best layout for your data within in a spreadsheet is as a single big
+rectangle with rows corresponding to subjects and columns corresponding to
+variables. The first row should contain variable names.
+(*Please don't use more than one row for the variable names.*)
 An example of a rectangular layout is shown in Figure 4.
 
-![An example spreadsheet with a rectangular layout.](figure/04_example_rectangle-1.png)
+![An example spreadsheet with a rectangular layout. This layout will aid future analyses.](figure/04_example_rectangle-1.png)
 
-Some data sets won't fit nicely into a rectangle, but they will usually
+Some data sets won't fit nicely into a single rectangle, but they will usually
 fit into a set of rectangles, in which case you can make a set of Excel files,
-each with a rectangle of data. Some data don't even fit into a set of
-rectangles, but then maybe spreadsheets are not the best format for
-them, as spreadsheets are inherently rectangular.
+each with a rectangle of data. It is best to keep each rectangle in its own
+file; tables scattered around a worksheet are difficult to work with, and they
+make it hard to export the data to CSV files (which we will discuss shortly).
+
+Some data don't even fit into a set of rectangles, but then maybe spreadsheets
+are not the best format for them, as spreadsheets are inherently rectangular.
 
 The data files that we receive are usually _not_ in rectangular
 form. More often, there seem to be bits of data sprinkled about.
 Several examples are shown in Figure 5.
 
-![Examples of spreadsheets with non-rectangular layouts.](figure/05_non_rectangular-1.png)
+![Examples of spreadsheets with non-rectangular layouts. These layouts are likely to cause problems in analysis.](figure/05_non_rectangular-1.png)
 
 In the spreadsheets in Figure 5A and 5B, the data analyst will need to
 study the layout, work out what everything means, and then spend some
@@ -291,7 +304,7 @@ In this sort of situation, we often see merged cells: merging the
 centered above the three columns with "`date`", "`weight`", and
 "`glucose`".
 
-![A spreadsheet with two header rows.](figure/07_two_header_rows-1.png)
+![A spreadsheet with two header rows. It is better to have a single header row. See Figure 8 for a tidy data layout that eliminates the need for multiple header rows and repeated column headers.](figure/07_two_header_rows-1.png)
 
 We would prefer to have the week information within the variable
 name. So, for example, there could be a single header row containing
@@ -304,9 +317,13 @@ particular day, as shown in Figure 8.
 
 ![A tidy version of the data in Figure 7.](figure/08_fig7_fixed-1.png)
 
-Have sympathy for your analyst (which could be yourself):
-organize your data as a rectangle (or, if necessary, as a set of
-rectangles).
+Have sympathy for your analyst (which could be yourself): organize your data as
+a rectangle (or, if necessary, as a set of rectangles). This raises the question
+of whether to use multiple worksheets within one Excel file, or whether it would
+be better to use multiple files, each with one worksheet. We prefer to have
+multiple files with one sheet each so we can save the data as CSV files (more on
+this later), but if you do use multiple worksheets in a file be sure to use a
+consistent structure.
 
 ## Create a data dictionary
 
@@ -446,7 +463,7 @@ that happen to you.
 Consider using a formal version control system, like
 git, though it is not the best for data
 files. If you want to get a bit fancy, maybe look at
-dat (<https://https://datproject.org/>).
+dat (<https://datproject.org/>).
 
 Keep all versions of the data files, so that if something gets
 corrupted (e.g., you accidentally type over some of the data without
@@ -595,5 +612,9 @@ it is best not to use copy-and-paste to rearrange the files. By doing
 so, there's a good chance of introducing errors. Data rearrangement is
 best accomplished via code (such as with an R, Python, or Ruby
 script) so you never lose the record of what you did to the data.
+
+## Acknowledgments
+
+Lance Waller generously provided comments to improve the manuscript.
 
 ## References
