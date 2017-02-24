@@ -47,13 +47,20 @@ between operating systems, which can cause problems in downstream analyses
 these common errors and design spreadsheets that are tidy, consistent, and as
 resistant to mistakes as possible.
 
-In this paper we offer practical recommendations for organizing data in
-spreadsheets. By following this advice, researchers will create spreadsheets
-that are less error-prone, easier for computers to process, and easier to share
-with collaborators and the public. Spreadsheets that adhere to our
-recommendations will interface easily with the tidy tools and reproducible
-methods described elsewhere in this collection and will form the basis of a
-robust and reproducible analytic workflow.
+Spreadsheets are often used as a multipurpose tool for data entry, storage,
+analysis, and visualization. Most spreadsheet programs allow users to perform
+all of these tasks, however we believe that spreadsheets are best suited to data
+entry and storage, and that analysis and visualization should happen separately.
+Analyzing and visualizing data in a separate program reduces the risk of
+contaminating or destroying the raw data in the spreadsheet.
+
+In this paper we offer practical recommendations for organizing spreadsheet data
+in a way that both humans and computer programs can read. By following this
+advice, researchers will create spreadsheets that are less error-prone, easier
+for computers to process, and easier to share with collaborators and the public.
+Spreadsheets that adhere to our recommendations will interface easily with the
+tidy tools and reproducible methods described elsewhere in this collection and
+will form the basis of a robust and reproducible analytic workflow.
 
 ## Be consistent
 
@@ -126,15 +133,11 @@ When formatting dates, we strongly recommend using the global
 "ISO 8601" standard, `YYYY-MM-DD`, such as `2013-02-27`. (See the related xkcd
 comic, <https://xkcd.com/1179>.)
 
-But note that Microsoft Excel does
-bizarre things with
-dates (see <https://storify.com/kara_woo/excel-date-system-fiasco>). It
-stores them internally as an integer, counting the days since
-1900-01-01. Wait that is only for Windows; on Macs, it counts the days
-since 1904-01-01.
-
-So, be careful to check that the dates haven't been mangled when your
-data come out of Excel.
+But note that Microsoft Excel does bizarre things with dates
+(see <https://storify.com/kara_woo/excel-date-system-fiasco>). It stores them
+internally as an integer, counting the days since 1900-01-01. Wait, that is only
+for Windows; on Macs, it counts the days since 1904-01-01. So, be careful to
+check that the dates haven't been mangled when your data come out of Excel.
 
 Excel also has a tendency to turn other things into dates. For
 example, Roger Peng reported on a conversation between Kasper Hansen
@@ -475,7 +478,7 @@ In this sort of situation, we often see merged cells: merging the
 centered above the three columns with "`date`", "`weight`", and
 "`glucose`".
 
-```{r 07_two_header_rows, fig.width=10, fig.cap="A spreadsheet with two header rows. It is better to have a single header row (see Figure 8)."}
+```{r 07_two_header_rows, fig.width=10, fig.cap="A spreadsheet with two header rows. It is better to have a single header row. See Figure 8 for a tidy data layout that eliminates the need for multiple header rows and repeated column headers."}
 mat6 <- rbind(c("", "", "week 4", "", "", "week 6", "", "", "week 8", "", ""),
               c("Mouse ID", "SEX", rep(c("date", "weight", "glucose"), 3)),
               c("3005", "M", "3/30/2007",  19.3, 635.0, "4/11/2007",  31,   460.7, "4/27/2007",  39.6, 530.2),
@@ -514,9 +517,13 @@ mat6b <- mat6b[order(as.numeric(mat6b[,1]), mat6b[,3]),]
 excel_fig(mat6b, cellwidth=c(85, 85, 85, 85, 100, 85, 85))
 ```
 
-Have sympathy for your analyst (which could be yourself):
-organize your data as a rectangle (or, if necessary, as a set of
-rectangles).
+Have sympathy for your analyst (which could be yourself): organize your data as
+a rectangle (or, if necessary, as a set of rectangles). This raises the question
+of whether to use multiple worksheets within one Excel file, or whether it would
+be better to use multiple files, each with one worksheet. We prefer to have
+multiple files with one sheet each so we can save the data as CSV files (more on
+this later), but if you do use multiple worksheets in a file be sure to use a
+consistent structure.
 
 ## Create a data dictionary
 
@@ -690,7 +697,7 @@ that happen to you.
 Consider using a formal version control system, like
 git, though it is not the best for data
 files. If you want to get a bit fancy, maybe look at
-dat (<https://https://datproject.org/>).
+dat (<https://datproject.org/>).
 
 Keep all versions of the data files, so that if something gets
 corrupted (e.g., you accidentally type over some of the data without
