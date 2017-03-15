@@ -153,7 +153,7 @@ and Jeff Leek (<http://bit.ly/twitter_oct4a>,
 > Jeff: _Oct-4: because Excel turns it into a date and it actually has
 > a cool function._
 
-On this point, [@ziemann2016] studied gene lists contained within the
+On this point, Ziemann et al. [-@ziemann2016] studied gene lists contained within the
 supplementary files from 18 journals for the years 2005-2015, and
 found that ~20% of gene lists had errors in the gene names, related to
 the conversion of gene symbols to dates or floating-point numbers.
@@ -211,11 +211,11 @@ it clear that the data are known to be missing rather than
 unintentionally left blank.
 
 Figure 2 contains two examples of spreadsheets with some empty cells.
-In Figure 2A, cells where left blank when a single value was meant to be
+In Figure 2A, cells were left blank when a single value was meant to be
 repeated multiple times. Please don't do this!
 It is additional work for the analyst to determine the implicit values for these cells.
-Moreover, if the rows were sorted at some point, the
-date column could be completely mangled.
+Moreover, if the rows are sorted at some point, the
+date column will be completely mangled.
 
 ```{r 02_blank_cells, fig.width=12, fig.cap="Examples of spreadsheets that violate the 'no empty cells' recommendation. **A:** A spreadsheet where only the first of several repeated values was included. **B:** A spreadsheet with a complicated layout and some implicit column headers. For a tidy version of this data, see Figure 3."}
 layout(cbind(1,2), width=c(8,10))
@@ -251,7 +251,7 @@ see by eye, it can be hard to deal with this in later analyses.
 
 You could fill in some of those cells, to make it more clear, but even
 better would be to make a "tidy" version of the data [@wickham2014],
-with each row being one replicate and the response values all in one column, as in
+with each row being one replicate and with the response values all in one column, as in
 Figure 3. We will discuss this in more detail, below.
 
 ```{r 03_fig2B_fixed, fig.cap="A tidy version of the data in Figure 2B.", fig.height=5}
@@ -277,7 +277,7 @@ data. Don't put more than one thing in a cell.
 
 For example, you might have a column with "`plate position`" as
 "`plate-well`", such as "`13-A01`". It would be better to separate this
-into "`plate`" and "`well`" (containing "`13`" and "`A01`"), or even
+into "`plate`" and "`well`" columns (containing "`13`" and "`A01`"), or even
 "`plate`", "`well_row`", and "`well_column`" (containing "`13`", "`A`",
 and "`1`").
 
@@ -288,7 +288,7 @@ put the units in a separate data dictionary (see below).
 
 Another common situation is to include a note within a cell, with the
 data, like "`0 (below threshold)`". Instead, write "`0`" and include a
-separate column with notes.
+separate column with such notes.
 
 Finally, don't merge cells. It might look pretty, but you end up
 breaking the rule of _no empty cells_.
@@ -318,6 +318,10 @@ fit into a set of rectangles, in which case you can make a set of Excel files,
 each with a rectangle of data. It is best to keep each rectangle in its own
 file; tables scattered around a worksheet are difficult to work with, and they
 make it hard to export the data to CSV files (which we will discuss shortly).
+You might also consider having a single Excel file with multiple
+worksheets. We prefer to have multiple files with one sheet each so we
+can more easily save the data as CSV files, but if you do use multiple
+worksheets in a file be sure to use a consistent structure.
 
 Some data don't even fit into a set of rectangles, but then maybe spreadsheets
 are not the best format for them, as spreadsheets are inherently rectangular.
@@ -518,12 +522,7 @@ excel_fig(mat6b, cellwidth=c(85, 85, 85, 85, 100, 85, 85))
 ```
 
 Have sympathy for your analyst (which could be yourself): organize your data as
-a rectangle (or, if necessary, as a set of rectangles). This raises the question
-of whether to use multiple worksheets within one Excel file, or whether it would
-be better to use multiple files, each with one worksheet. We prefer to have
-multiple files with one sheet each so we can save the data as CSV files (more on
-this later), but if you do use multiple worksheets in a file be sure to use a
-consistent structure.
+a rectangle (or, if necessary, as a set of rectangles).
 
 ## Create a data dictionary
 
@@ -546,7 +545,7 @@ includes an overview of the project and data.
 
 An example data dictionary is displayed in Figure 9.
 Note that this is a rectangular data set, like any other. The first
-column contains the variable names. The second column is more readable
+column contains the variable names. The second column is a more readable
 version, as might be used in data visualizations. The third column
 groups the variables into different categories, which might
 also be used in data visualizations. The last column is a description.
@@ -647,7 +646,7 @@ hard, and so it is worth putting some time and thought into it.
 As a general rule, don't use spaces, either in variable names (that
 is, the names of the columns in your data) or in
 file names. They make programming harder: the analyst will need to
-surround everything in double quotes, like `"glucose 6 weeks"` rather
+surround everything in double quotes, like `"glucose 6 weeks"`, rather
 than just writing `glucose_6_weeks`. Where you might use spaces, use
 underscores or perhaps hyphens. But don't use a mixture of underscores
 and hyphens; pick one and be consistent.
@@ -700,13 +699,13 @@ files. If you want to get a bit fancy, maybe look at
 dat (<https://datproject.org/>).
 
 Keep all versions of the data files, so that if something gets
-corrupted (e.g., you accidentally type over some of the data without
-noticing it until much later), you will be able to go back and fix it.
+corrupted (e.g., you accidentally type over some of the data and don't
+notice it until much later), you will be able to go back and fix it.
 Before you start inserting more data, make a copy of the file with a
 new version number: `file_v1.xlsx`, `file_v2.xlsx`, ...
 
 When you are not actively entering data, and particularly when you are
-done entering data, **write-protect the file**. That way, you won't
+done entering data, *write-protect the file*. That way, you won't
 accidentally change things.
 
 - On a Mac, right-click on the file in Finder and select "Get Info". In the menu
@@ -719,7 +718,7 @@ accidentally change things.
   with "Attributes". Select the box for "Read-only" and click the "OK"
   button.
 
-**Back up your data!**
+*Back up your data!*
 
 ## Use data validation to avoid errors
 
@@ -876,6 +875,6 @@ script) so you never lose the record of what you did to the data.
 
 ## Acknowledgments
 
-Lance Waller generously provided comments to improve the manuscript.
+Lance Waller and Lincoln Mullen generously provided comments to improve the manuscript.
 
 ## References
