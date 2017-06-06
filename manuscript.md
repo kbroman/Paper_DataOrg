@@ -29,8 +29,17 @@ Spreadsheets are often used as a multipurpose tool for data entry, storage,
 analysis, and visualization. Most spreadsheet programs allow users to perform
 all of these tasks, however we believe that spreadsheets are best suited to data
 entry and storage, and that analysis and visualization should happen separately.
-Analyzing and visualizing data in a separate program reduces the risk of
+Analyzing and visualizing data in a separate program, or at least in a
+separate copy of the data file, reduces the risk of
 contaminating or destroying the raw data in the spreadsheet.
+
+Murrell [-@murrell2013] contrasts data that is formatted for humans to
+view by eye with data that is formatted for a computer. He provides an
+extended example of computer code to extract data from a set of files
+with complex arrangements. It is important that data analysts be able
+to work with such complex data files. But if the initial arrangement
+of the data files is planned with the computer in mind, this would
+simplify the later analysis process.
 
 In this paper we offer practical recommendations for organizing spreadsheet data
 in a way that both humans and computer programs can read. By following this
@@ -40,6 +49,13 @@ Spreadsheets that adhere to our recommendations will interface easily with the
 tidy tools and reproducible methods described elsewhere in this collection and
 will form the basis of a robust and reproducible analytic workflow.
 
+For an existing dataset whose arrangement could be improved, we
+recommend against applying tedious and potentially error-prone
+hand-editing to revise the arrangement. Rather, we hope that the
+reader might apply these principles when designing the layout for
+future datasets.
+
+
 ## Be consistent
 
 The first rule of data organization is *be consistent*. Whatever you do, do it
@@ -48,7 +64,7 @@ start will prevent you and your collaborators from having to spend time
 harmonizing the data later.
 
 _Use consistent codes for categorical variables._ For a
-categorical variable like *sex*, use a single common value for
+categorical variable like the sex of a mouse in a genetics study, use a single common value for
 males (e.g. "`male`") and a single common value for females
 (e.g. "`female`"). Don't sometimes write "`M`", sometimes "`male`",
 and sometimes "`Male`". Pick one and stick to it.
@@ -92,7 +108,8 @@ need to.
 
 _Use a consistent format for all dates,_ preferably with the standard
 format `YYYY-MM-DD`, for example `2015-08-01`. If sometimes you write `8/1/2015`
-and sometimes `8-1-15`, you are asking for trouble.
+and sometimes `8-1-15`, it will be more difficult to use the dates in
+analyses or data visualizations.
 
 _Use consistent phrases in your notes._ If you have a separate
 column of notes (for example, "`dead`" or "`lo off curve`"), be
@@ -103,19 +120,66 @@ sometimes "`Dead`", or sometimes "`lo off curve`" and sometimes
 _Be careful about extra spaces within
 cells._ A blank cell is different than a cell that contains a single space. And
 "`male`" is different from "` male `" (that is, with spaces at the beginning and
-end). These can be a headache later on.
+end).
+
+## Choose good names for things
+
+It is important to pick good names for things. This can be
+hard, and so it is worth putting some time and thought into it.
+
+As a general rule, don't use spaces, either in variable names (that
+is, the names of the columns in your data) or in
+file names. They make programming harder: the analyst will need to
+surround everything in double quotes, like `"glucose 6 weeks"`, rather
+than just writing `glucose_6_weeks`. Where you might use spaces, use
+underscores or perhaps hyphens. But don't use a mixture of underscores
+and hyphens; pick one and be consistent.
+
+Be careful about extraneous spaces (say, at the beginning or end of a
+variable name). "`glucose`" is different from "`glucose `" (with an
+extra space at the end).
+
+Avoid special characters, too. (Except for underscores and hyphens;
+they are okay.) Other symbols (`$`, `@`, `%`, `#`, `&`, `*`, `(`, `)`,
+`!`, `/`, etc.) often have special meaning in programming languages, and so
+they can be harder to handle.  They are also a bit harder to type.
+
+The main principle in choosing names, whether for variables or for
+file names, is *short, but meaningful*. So not *too* short.
+
+The Data Carpentry
+lesson on using spreadsheets (see <http://bit.ly/datacarp_scm>)
+has a nice table with good and bad example variable names:
+
+**good name**       | **good alternative** | **avoid**
+------------------- | -------------------- | ---------
+`Max_temp`          | `MaxTemp1`           | `Maximum Temp (°C)`
+`Precipitation`     | `Precipitation_mm`   | `precmm`
+`Mean_year_growth`  | `MeanYearGrowth`     | `Mean growth/year`
+`sex`               | `sex`                | `M/F`
+`weight`            | `weight`             | `w.`
+`cell_type`         | `CellType`           | `Cell type`
+`first_observation` | `Observation_01`     | `1st Obs.`
+
+We agree with all of this, though we would maybe cut down on some of the
+capitalization. So maybe `max_temp`, `precipitation`, and `mean_year_growth`.
+
+Finally, never include "`final`" in a file name. You will invariably end up
+with "`final_ver2`". (We can't say that without referring to the
+widely-cited PhD comic, <http://bit.ly/phdcom_final>.)
 
 ## Write dates like YYYY-MM-DD
 
-When formatting dates, we strongly recommend using the global
+When entering dates, we strongly recommend using the global
 "ISO 8601" standard, `YYYY-MM-DD`, such as `2013-02-27`. (See the related xkcd
 comic, <https://xkcd.com/1179>.)
 
 But note that Microsoft Excel does bizarre things with dates
 (see <https://storify.com/kara_woo/excel-date-system-fiasco>). It stores them
-internally as an integer, counting the days since 1900-01-01. Wait, that is only
-for Windows; on Macs, it counts the days since 1904-01-01. So, be careful to
-check that the dates haven't been mangled when your data come out of Excel.
+internally as an number, counting the days since 1900-01-01. Wait, that is only
+for Windows; on Macs, it counts the days since 1904-01-01. So, you may
+need to manually check that the dates haven't been mangled when your data
+come out of Excel.
 
 Excel also has a tendency to turn other things into dates. For
 example, Roger Peng reported on a conversation between Kasper Hansen
@@ -144,7 +208,7 @@ that are going to contain dates, so that it doesn't do anything to them:
 - Choose "Text" on the left
 
 However, if you do this on columns that _already_ contain dates, Excel will
-convert them to a text value of their underlying integer representation (i.e.
+convert them to a text value of their underlying numeric representation (i.e.
 days since 1900-01-01 or 1904-01-01).
 
 Another way to force Excel to treat dates as text is to begin the date with an
@@ -156,7 +220,7 @@ diligence and consistency.
 
 Alternatively, you could
 create three separate columns
-with year, month, and day. Those will be ordinary integers, and so
+with year, month, and day. Those will be ordinary numbers, and so
 Excel won't mess them up.
 
 But the point we most want to emphasize here: be consistent in the way
@@ -167,7 +231,8 @@ put the year, month, and day in separate columns, if you want).
 Figure 1 displays a portion of a spreadsheet that we got from a
 collaborator. We don't quite remember what those e's were for, but in
 any case having
-different date formats within a column can cause headaches later.
+different date formats within a column makes it more difficult to use
+the dates in later analyses or data visualizations.
 
 Use care about dates, and be consistent.
 
@@ -182,12 +247,11 @@ state a preference for leaving cells blank), but we would prefer to have
 it clear that the data are known to be missing rather than
 unintentionally left blank.
 
-Figure 2 contains two examples of spreadsheets with some empty cells.
-In Figure 2A, cells were left blank when a single value was meant to be
-repeated multiple times. Please don't do this!
-It is additional work for the analyst to determine the implicit values for these cells.
-Moreover, if the rows are sorted at some point, the
-date column will be completely mangled.
+Figure 2 contains two examples of spreadsheets with some empty cells. In Figure
+2A, cells were left blank when a single value was meant to be repeated multiple
+times. Please don't do this! It is additional work for the analyst to determine
+the implicit values for these cells. Moreover, if the rows are sorted at some
+point there may be no way to recover the dates that belong in the empty cells.
 
 ![Examples of spreadsheets that violate the 'no empty cells' recommendation. **A:** A spreadsheet where only the first of several repeated values was included. **B:** A spreadsheet with a complicated layout and some implicit column headers. For a tidy version of this data, see Figure 3.](figure/02_blank_cells-1.png)
 
@@ -199,10 +263,10 @@ that columns B, C, F, and G all concern "normal", while
 columns D, E, H, and I concern "mutant". But while it may be easy to
 see by eye, it can be hard to deal with this in later analyses.
 
-You could fill in some of those cells, to make it more clear, but even
-better would be to make a "tidy" version of the data [@wickham2014],
+You could fill in some of those cells, to make it more clear.
+Alternatively, make a "tidy" version of the data [@wickham2014],
 with each row being one replicate and with the response values all in one column, as in
-Figure 3. We will discuss this in more detail, below.
+Figure 3. We will discuss this further, below.
 
 ![A tidy version of the data in Figure 2B.](figure/03_fig2B_fixed-1.png)
 
@@ -315,7 +379,7 @@ name. So, for example, there could be a single header row containing
 `Mouse ID`, `SEX`, `date_4`, `weight_4`, `glucose_4`, `date_6`,
 `weight_6`, etc.
 
-Even better would be to make it a "tidy" data set
+Alternatively, make it a "tidy" data set
 with each row being a subject on a
 particular day, as shown in Figure 8.
 
@@ -399,56 +463,9 @@ in many programs).
 ![Highlighting in spreadsheets. **A:** A potential outlier indicated by highlighting the cell. **B:** The preferred method for indicating outliers, via an additional column.](figure/10_highlight_outlier-1.png)
 
 Another possible use of highlighting would be to indicate males and
-females by highlighting the corresponding rows in different
+females in a mouse study by highlighting the corresponding rows in different
 colors. But rather than use highlighting to indicate sex, it is better
 to include a `sex` column, with values `Male` or `Female`.
-
-
-## Choose good names for things
-
-It is important to pick good names for things. This can be
-hard, and so it is worth putting some time and thought into it.
-
-As a general rule, don't use spaces, either in variable names (that
-is, the names of the columns in your data) or in
-file names. They make programming harder: the analyst will need to
-surround everything in double quotes, like `"glucose 6 weeks"`, rather
-than just writing `glucose_6_weeks`. Where you might use spaces, use
-underscores or perhaps hyphens. But don't use a mixture of underscores
-and hyphens; pick one and be consistent.
-
-Be careful about extraneous spaces (say, at the beginning or end of a
-variable name). "`glucose`" is different from "`glucose `" (with an
-extra space at the end). Extraneous spaces can cause headaches later.
-
-Avoid special characters, too. (Except for underscores and hyphens;
-they are okay.) Other symbols (`$`, `@`, `%`, `#`, `&`, `*`, `(`, `)`,
-`!`, `/`, etc.) often have special meaning in programming languages, and so
-they can be harder to handle.  They are also a bit harder to type.
-
-The main principle in choosing names, whether for variables or for
-file names, is *short, but meaningful*. So not *too* short.
-
-The Data Carpentry
-lesson on using spreadsheets (see <http://bit.ly/datacarp_scm>)
-has a nice table with good and bad example variable names:
-
-**good name**       | **good alternative** | **avoid**
-------------------- | -------------------- | ---------
-`Max_temp`          | `MaxTemp1`           | `Maximum Temp (°C)`
-`Precipitation`     | `Precipitation_mm`   | `precmm`
-`Mean_year_growth`  | `MeanYearGrowth`     | `Mean growth/year`
-`sex`               | `sex`                | `M/F`
-`weight`            | `weight`             | `w.`
-`cell_type`         | `CellType`           | `Cell type`
-`first_observation` | `Observation_01`     | `1st Obs.`
-
-We agree with all of this, though we would maybe cut down on some of the
-capitalization. So maybe `max_temp`, `precipitation`, and `mean_year_growth`.
-
-Finally, never include "`final`" in a file name. You will invariably end up
-with "`final_ver2`". (We can't say that without referring to the
-widely-cited PhD comic, <http://bit.ly/phdcom_final>.)
 
 ## Make backups
 
@@ -556,31 +573,6 @@ that will not work when saved as a plain text file,
 that is a problem.
 For your primary data file, keep things simple.
 
-## Additional considerations
-
-Here are a few other things to avoid, not previously mentioned or
-deserving further emphasis:
-
-We once had a file with gene expression microarray data where the gene
-identifiers were long integers. It had gone through Excel at some
-point, and the identifier `1000000` had been changed to `1e6`, which
-of course didn't match what was in the file with gene annotations.
-
-We dislike the "Split" window in Excel (from the menu bar, Window
-→ Split). A lot of our collaborators seem to use it, but it drives us
-batty. To get rid of it, use Window → Remove Split. On the other
-hand, we like "Freeze Panes". Go to cell B2 and click Window → Freeze
-Panes. Then when you scroll down or to the right, the values in the
-top row (which contain the column names) and the first column (which
-often contain individual identifiers) remain shown.
-
-The Data Carpentry lesson on using spreadsheets points to a common
-mistake of not filling in zeroes (see <http://bit.ly/datacarp_scm>):
-That one might enter only the non-zero values and leave the
-cells-that-would-be-zero blank. *Don't do that!* Zeros are data, and
-you will need them.
-
-
 ## Summary
 
 Spreadsheet programs (such as Microsoft Excel, Google Sheets, and
@@ -614,6 +606,6 @@ script) so you never lose the record of what you did to the data.
 
 ## Acknowledgments
 
-Lance Waller and Lincoln Mullen generously provided comments to improve the manuscript.
+Lance Waller, Lincoln Mullen, and Jenny Bryan generously provided comments to improve the manuscript.
 
 ## References
