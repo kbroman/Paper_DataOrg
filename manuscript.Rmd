@@ -55,6 +55,14 @@ Analyzing and visualizing data in a separate program, or at least in a
 separate copy of the data file, reduces the risk of
 contaminating or destroying the raw data in the spreadsheet.
 
+Murrell [-@murrell2013] contrasts data that is formatted for humans to
+view by eye with data that is formatted for a computer. He provides an
+extended example of computer code to extract data from a set of files
+with complex arrangements. It is important that data analysts be able
+to work with such complex data files. But if the initial arrangement
+of the data files is planned with the computer in mind, this would
+simplify the later analysis process.
+
 In this paper we offer practical recommendations for organizing spreadsheet data
 in a way that both humans and computer programs can read. By following this
 advice, researchers will create spreadsheets that are less error-prone, easier
@@ -78,7 +86,7 @@ start will prevent you and your collaborators from having to spend time
 harmonizing the data later.
 
 _Use consistent codes for categorical variables._ For a
-categorical variable like *sex*, use a single common value for
+categorical variable like the sex of a mouse in a genetics study, use a single common value for
 males (e.g. "`male`") and a single common value for females
 (e.g. "`female`"). Don't sometimes write "`M`", sometimes "`male`",
 and sometimes "`Male`". Pick one and stick to it.
@@ -122,7 +130,8 @@ need to.
 
 _Use a consistent format for all dates,_ preferably with the standard
 format `YYYY-MM-DD`, for example `2015-08-01`. If sometimes you write `8/1/2015`
-and sometimes `8-1-15`, you are asking for trouble.
+and sometimes `8-1-15`, it will be more difficult to use the dates in
+analyses or data visualizations.
 
 _Use consistent phrases in your notes._ If you have a separate
 column of notes (for example, "`dead`" or "`lo off curve`"), be
@@ -133,7 +142,7 @@ sometimes "`Dead`", or sometimes "`lo off curve`" and sometimes
 _Be careful about extra spaces within
 cells._ A blank cell is different than a cell that contains a single space. And
 "`male`" is different from "` male `" (that is, with spaces at the beginning and
-end). These can be a headache later on.
+end).
 
 ## Choose good names for things
 
@@ -150,7 +159,7 @@ and hyphens; pick one and be consistent.
 
 Be careful about extraneous spaces (say, at the beginning or end of a
 variable name). "`glucose`" is different from "`glucose `" (with an
-extra space at the end). Extraneous spaces can cause headaches later.
+extra space at the end).
 
 Avoid special characters, too. (Except for underscores and hyphens;
 they are okay.) Other symbols (`$`, `@`, `%`, `#`, `&`, `*`, `(`, `)`,
@@ -190,8 +199,9 @@ comic, <https://xkcd.com/1179>.)
 But note that Microsoft Excel does bizarre things with dates
 (see <https://storify.com/kara_woo/excel-date-system-fiasco>). It stores them
 internally as an number, counting the days since 1900-01-01. Wait, that is only
-for Windows; on Macs, it counts the days since 1904-01-01. So, be careful to
-check that the dates haven't been mangled when your data come out of Excel.
+for Windows; on Macs, it counts the days since 1904-01-01. So, you may
+need to manually check that the dates haven't been mangled when your data
+come out of Excel.
 
 Excel also has a tendency to turn other things into dates. For
 example, Roger Peng reported on a conversation between Kasper Hansen
@@ -243,7 +253,8 @@ put the year, month, and day in separate columns, if you want).
 Figure 1 displays a portion of a spreadsheet that we got from a
 collaborator. We don't quite remember what those e's were for, but in
 any case having
-different date formats within a column can cause headaches later.
+different date formats within a column makes it more difficult to use
+the dates in later analyses or data visualizations.
 
 Use care about dates, and be consistent.
 
@@ -302,10 +313,10 @@ that columns B, C, F, and G all concern "normal", while
 columns D, E, H, and I concern "mutant". But while it may be easy to
 see by eye, it can be hard to deal with this in later analyses.
 
-You could fill in some of those cells, to make it more clear, but even
-better would be to make a "tidy" version of the data [@wickham2014],
+You could fill in some of those cells, to make it more clear.
+Alternatively, make a "tidy" version of the data [@wickham2014],
 with each row being one replicate and with the response values all in one column, as in
-Figure 3. We will discuss this in more detail, below.
+Figure 3. We will discuss this further, below.
 
 ```{r 03_fig2B_fixed, fig.cap="A tidy version of the data in Figure 2B.", fig.height=5}
 mat2b <- data.frame(strain=rep(c("A", "A", "B", "B"), 4),
@@ -553,7 +564,7 @@ name. So, for example, there could be a single header row containing
 `Mouse ID`, `SEX`, `date_4`, `weight_4`, `glucose_4`, `date_6`,
 `weight_6`, etc.
 
-Even better would be to make it a "tidy" data set
+Alternatively, make it a "tidy" data set
 with each row being a subject on a
 particular day, as shown in Figure 8.
 
@@ -686,7 +697,7 @@ mtext(side=3, adj=0, "B", font=2, cex=1.2, line=0.5)
 ```
 
 Another possible use of highlighting would be to indicate males and
-females by highlighting the corresponding rows in different
+females in a mouse study by highlighting the corresponding rows in different
 colors. But rather than use highlighting to indicate sex, it is better
 to include a `sex` column, with values `Male` or `Female`.
 
@@ -856,6 +867,6 @@ script) so you never lose the record of what you did to the data.
 
 ## Acknowledgments
 
-Lance Waller and Lincoln Mullen generously provided comments to improve the manuscript.
+Lance Waller, Lincoln Mullen, and Jenny Bryan generously provided comments to improve the manuscript.
 
 ## References
