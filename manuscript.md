@@ -33,8 +33,8 @@ Analyzing and visualizing data in a separate program, or at least in a
 separate copy of the data file, reduces the risk of
 contaminating or destroying the raw data in the spreadsheet.
 
-Murrell [-@murrell2013] contrasts data that is formatted for humans to
-view by eye with data that is formatted for a computer. He provides an
+Murrell [-@murrell2013] contrasts data that are formatted for humans to
+view by eye with data that are formatted for a computer. He provides an
 extended example of computer code to extract data from a set of files
 with complex arrangements. It is important that data analysts be able
 to work with such complex data files. But if the initial arrangement
@@ -148,18 +148,18 @@ The main principle in choosing names, whether for variables or for
 file names, is *short, but meaningful*. So not *too* short.
 
 The Data Carpentry
-lesson on using spreadsheets (see <http://bit.ly/datacarp_scm>)
+lesson on using spreadsheets (see <http://www.datacarpentry.org/spreadsheet-ecology-lesson/02-common-mistakes>)
 has a nice table with good and bad example variable names:
 
 **good name**       | **good alternative** | **avoid**
 ------------------- | -------------------- | ---------
-`Max_temp`          | `MaxTemp1`           | `Maximum Temp (°C)`
-`Precipitation`     | `Precipitation_mm`   | `precmm`
+`Max_temp_C`        | `MaxTemp`            | `Maximum Temp ($^{\circ}$C)`
+`Precipitation_mm`  | `Precipitation`      | `precmm`
 `Mean_year_growth`  | `MeanYearGrowth`     | `Mean growth/year`
 `sex`               | `sex`                | `M/F`
 `weight`            | `weight`             | `w.`
 `cell_type`         | `CellType`           | `Cell type`
-`first_observation` | `Observation_01`     | `1st Obs.`
+`Observation_01`    | `first_observation`  | `1st Obs.`
 
 We agree with all of this, though we would maybe cut down on some of the
 capitalization. So maybe `max_temp`, `precipitation`, and `mean_year_growth`.
@@ -176,7 +176,7 @@ comic, <https://xkcd.com/1179>.)
 
 But note that Microsoft Excel does bizarre things with dates
 (see <https://storify.com/kara_woo/excel-date-system-fiasco>). It stores them
-internally as an number, counting the days since 1900-01-01. Wait, that is only
+internally as a number, counting the days since 1900-01-01. Wait, that is only
 for Windows; on Macs, it counts the days since 1904-01-01. So, you may
 need to manually check that the dates haven't been mangled when your data
 come out of Excel.
@@ -297,7 +297,7 @@ breaking the rule of _no empty cells_.
 
 ## Make it a rectangle
 
-The best layout for your data within in a spreadsheet is as a single big
+The best layout for your data within a spreadsheet is as a single big
 rectangle with rows corresponding to subjects and columns corresponding to
 variables. The first row should contain variable names.
 (*Please don't use more than one row for the variable names.*)
@@ -305,7 +305,7 @@ An example of a rectangular layout is shown in Figure 4.
 
 ![An example spreadsheet with a rectangular layout. This layout will aid future analyses.](figure/04_example_rectangle-1.png)
 
-Some data sets won't fit nicely into a single rectangle, but they will usually
+Some datasets won't fit nicely into a single rectangle, but they will usually
 fit into a set of rectangles, in which case you can make a set of Excel files,
 each with a rectangle of data. It is best to keep each rectangle in its own
 file; tables scattered around a worksheet are difficult to work with, and they
@@ -379,7 +379,7 @@ name. So, for example, there could be a single header row containing
 `Mouse ID`, `SEX`, `date_4`, `weight_4`, `glucose_4`, `date_6`,
 `weight_6`, etc.
 
-Alternatively, make it a "tidy" data set
+Alternatively, make it a "tidy" dataset
 with each row being a subject on a
 particular day, as shown in Figure 8.
 
@@ -408,7 +408,7 @@ information *about* the data. You will also want a `ReadMe` file that
 includes an overview of the project and data.
 
 An example data dictionary is displayed in Figure 9.
-Note that this is a rectangular data set, like any other. The first
+Note that this is a rectangular dataset, like any other. The first
 column contains the variable names. The second column is a more readable
 version, as might be used in data visualizations. The third column
 groups the variables into different categories, which might
@@ -456,7 +456,7 @@ For example, in Figure 10A, a suspicious entry is highlighted. It would be
 better to include an additional column that indicates the outliers (as in Figure
 10B). The highlighting is nice visually, but it is hard to extract that
 information for use in the later analysis. Analysis programs can much more
-readily handle data that is stored in a column than that which is encoded in
+readily handle data that are stored in a column than that which is encoded in
 cell highlighting, font, etc. (and in fact this markup will be lost completely
 in many programs).
 
