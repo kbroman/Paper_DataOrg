@@ -239,11 +239,12 @@ apostrophe, like this: `'2014-06-14`
 cells as text, but the apostrophe will not appear when you view the spreadsheet
 or export it to other formats. This is a handy trick, but it requires impeccable
 diligence and consistency.
-
 Alternatively, you could
 create three separate columns
 with year, month, and day. Those will be ordinary numbers, and so
 Excel won't mess them up.
+Finally, you could represent dates as an 8-digit integer of the form
+`YYYYMMDD`, for example `20140614` for `2014-06-14` [see @briney2017].
 
 But the point we most want to emphasize here: be consistent in the way
 in which you write dates. And really, always use the `YYYY-MM-DD`
