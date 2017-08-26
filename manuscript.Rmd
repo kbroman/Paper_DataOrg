@@ -829,10 +829,10 @@ Note that there is also an option to save as "Tab Delimited Text". Many people
 prefer that, especially those who work in countries where commas are used a
 decimal separators.
 
-Also note that, if your Excel file *did* contain critical features
-that will not work when saved as a plain text file,
-that is a problem.
-For your primary data file, keep things simple.
+Also note that, if your Excel file *did* contain critical features that will not
+work when saved as a plain text file, such as highlighted cells, that is a
+problem; those features *will* be lost. For your primary data file, keep things
+simple.
 
 ## Summary
 
