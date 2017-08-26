@@ -227,8 +227,7 @@ Information School, University of Washington<br><a class="author_email" href="ma
 <li>Choose “Text” on the left</li>
 </ul>
 <p>However, if you do this on columns that <em>already</em> contain dates, Excel will convert them to a text value of their underlying numeric representation (i.e. days since 1900-01-01 or 1904-01-01).</p>
-<p>Another way to force Excel to treat dates as text is to begin the date with an apostrophe, like this: <code>'2014-06-14</code> (see <a href="http://bit.ly/twitter_apos" class="uri">http://bit.ly/twitter_apos</a>). Excel will treat the cells as text, but the apostrophe will not appear when you view the spreadsheet or export it to other formats. This is a handy trick, but it requires impeccable diligence and consistency.</p>
-<p>Alternatively, you could create three separate columns with year, month, and day. Those will be ordinary numbers, and so Excel won’t mess them up.</p>
+<p>Another way to force Excel to treat dates as text is to begin the date with an apostrophe, like this: <code>'2014-06-14</code> (see <a href="http://bit.ly/twitter_apos" class="uri">http://bit.ly/twitter_apos</a>). Excel will treat the cells as text, but the apostrophe will not appear when you view the spreadsheet or export it to other formats. This is a handy trick, but it requires impeccable diligence and consistency. Alternatively, you could create three separate columns with year, month, and day. Those will be ordinary numbers, and so Excel won’t mess them up. Finally, you could represent dates as an 8-digit integer of the form <code>YYYYMMDD</code>, for example <code>20140614</code> for <code>2014-06-14</code> <span class="citation">(see Briney 2017)</span>.</p>
 <p>But the point we most want to emphasize here: be consistent in the way in which you write dates. And really, always use the <code>YYYY-MM-DD</code> format (or put the year, month, and day in separate columns, if you want).</p>
 <p>Figure 1 displays a portion of a spreadsheet that we got from a collaborator. We don’t quite remember what those e’s were for, but in any case having different date formats within a column makes it more difficult to use the dates in later analyses or data visualizations.</p>
 <p>Use care about dates, and be consistent.</p>
@@ -386,7 +385,7 @@ Information School, University of Washington<br><a class="author_email" href="ma
 <li>Quit Excel. It will ask you, “Do you want to save the changes you made?” Click “Don’t Save”, because you just saved them. (Excel really doesn’t want you to use a format other than its own.)</li>
 </ul>
 <p>Note that there is also an option to save as “Tab Delimited Text”. Many people prefer that, especially those who work in countries where commas are used a decimal separators.</p>
-<p>Also note that, if your Excel file <em>did</em> contain critical features that will not work when saved as a plain text file, that is a problem. For your primary data file, keep things simple.</p>
+<p>Also note that, if your Excel file <em>did</em> contain critical features that will not work when saved as a plain text file, such as highlighted cells, that is a problem; those features <em>will</em> be lost. For your primary data file, keep things simple.</p>
 </div>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
@@ -402,6 +401,9 @@ Information School, University of Washington<br><a class="author_email" href="ma
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
 <div id="refs" class="references">
+<div id="ref-briney2017">
+<p>Briney, K. 2017. “Two Strategies for Working with Dates in Excel.” <a href="http://dataabinitio.com/?p=798" class="uri">http://dataabinitio.com/?p=798</a>.</p>
+</div>
 <div id="ref-casimir1992">
 <p>Casimir, R. J. 1992. “Real Programmers Don’t Use Spreadsheets.” <em>SIGPLAN Not.</em> 27 (6): 10–16. doi:<a href="https://doi.org/10.1145/130981.130982">10.1145/130981.130982</a>.</p>
 </div>
