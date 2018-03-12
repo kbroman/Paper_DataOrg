@@ -1,4 +1,23 @@
-# Data organization in spreadsheets
+---
+title: "Data organization in spreadsheets"
+author:
+- name: Karl W. Broman
+  affiliation: "Department of Biostatistics & Medical Informatics, University of Wisconsin-Madison"
+  email: kbroman@biostat.wisc.edu
+- name: Kara H. Woo
+  affiliation: "Information School, University of Washington"
+  email: karawoo@uw.edu
+output:
+  pdf_document:
+    template: template.tex
+  md_document:
+    variant: markdown_github
+  html_document:
+    keep_md: yes
+    css: styles.css
+    fig_caption: yes
+bibliography: references.bib
+---
 
 
 
@@ -457,7 +476,7 @@ For example, in Figure 10A, a suspicious entry is highlighted. It would be
 better to include an additional column that indicates the outliers (as in Figure
 10B). The highlighting is nice visually, but it is hard to extract that
 information for use in the later analysis. Analysis programs can much more
-readily handle data that are stored in a column than that which is encoded in
+readily handle data that are stored in a column than data encoded in
 cell highlighting, font, etc. (and in fact this markup will be lost completely
 in many programs).
 
