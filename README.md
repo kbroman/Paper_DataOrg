@@ -10,6 +10,10 @@
 This is a paper on how to organize data within spreadsheets, based on the
 tutorial at <http://kbroman.org/dataorg>.
 
+Now available at [PeerJ Preprints](https://peerj.com/preprints/3183/)
+and in press at _The American Statistician_
+([doi:10.1080/00031305.2017.1375989](https://doi.org/10.1080/00031305.2017.1375989)).
+
 - [`manuscript.Rmd`](manuscript.Rmd) - the source file
 - [`manuscript.md`](manuscript.md) - viewable on GitHub
 - [`Makefile`](Makefile) - GNU Make file, to compile PDF and html
