@@ -671,7 +671,7 @@ For example, in Figure 10A, a suspicious entry is highlighted. It would be
 better to include an additional column that indicates the outliers (as in Figure
 10B). The highlighting is nice visually, but it is hard to extract that
 information for use in the later analysis. Analysis programs can much more
-readily handle data that are stored in a column than that which is encoded in
+readily handle data that are stored in a column than data encoded in
 cell highlighting, font, etc. (and in fact this markup will be lost completely
 in many programs).
 
