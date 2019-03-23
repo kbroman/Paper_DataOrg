@@ -1,5 +1,7 @@
 # Data Organization in Spreadsheets
 
+[![doi badge](https://zenodo.org/badge/DOI/10.5281/zenodo.2603989.svg)](https://doi.org/10.5281/zenodo.2603989)
+
 [Karl Broman](http://kbroman.org)
 ([`github.com/kbroman`](https://github.com/kbroman),
 [`@kwbroman`](https://twitter.com/kwbroman)) and
