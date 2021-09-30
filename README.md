@@ -17,8 +17,8 @@ and as a formal article in _The American Statistician_:
 
 > Broman KW, Woo KH (2018) Data organization in spreadsheets.
 > [Am Stat](http://www.tandfonline.com/toc/utas20/current) 72:2-10
-> [![pdf](https://kbroman.org/pages/icons16/pdf-icon.png)](https://www.tandfonline.com/doi/pdf/10.1080/00031305.2017.1375989)
-> [![doi](https://kbroman.org/pages/icons16/doi-icon.png)](https://doi.org/10.1080/00031305.2017.1375989)
+> [![pdf](https://kbroman.org/icons16/pdf-icon.png)](https://www.tandfonline.com/doi/pdf/10.1080/00031305.2017.1375989)
+> [![doi](https://kbroman.org/icons16/doi-icon.png)](https://doi.org/10.1080/00031305.2017.1375989)
 
 - [`manuscript.Rmd`](manuscript.Rmd) - the source file
 - [`manuscript.md`](manuscript.md) - viewable on GitHub
