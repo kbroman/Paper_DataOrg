@@ -10,12 +10,12 @@
 [`@kara_woo`](https://twitter.com/kara_woo))
 
 This is a paper on how to organize data within spreadsheets, based on the
-tutorial at <http://kbroman.org/dataorg>.
+tutorial at <https://kbroman.org/dataorg>.
 
 Now available at [PeerJ Preprints](https://peerj.com/preprints/3183/)
 and as a formal article in _The American Statistician_:
 
-> Broman KW**, Woo KH (2018) Data organization in spreadsheets.
+> Broman KW, Woo KH (2018) Data organization in spreadsheets.
 > [Am Stat](http://www.tandfonline.com/toc/utas20/current) 72:2-10
 > [![pdf](https://kbroman.org/pages/icons16/pdf-icon.png)](https://www.tandfonline.com/doi/pdf/10.1080/00031305.2017.1375989)
 > [![doi](https://kbroman.org/pages/icons16/doi-icon.png)](https://doi.org/10.1080/00031305.2017.1375989)
